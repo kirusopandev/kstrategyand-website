@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KStrategy&amp; — Strategy. Technology. First Principles.</title>
+<meta name="description" content="Quantum-ready, human-first intelligence. KStrategy& applies the Oloid Framework — a geometry-driven approach to technology strategy that returns organisations to first principles. Home of K.AI, AccessOPTI and K.AI Discovery.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Brand palette — KS_brand_colour */
+  :root{
+    --ink:#102830;          /* logo green */
+    --ink-soft:#3A4B52;
+    --paper:#F2F2F2;        /* slide grey */
+    --paper-dim:#E6E8E8;
+    --white:#FFFFFF;
+    --line:#CBD2D2;
+    --accent:#005656;       /* text-box green */
+    --accent-soft:#D9E6E6;
+    --orange:#F59504;       /* logo orange */
+    --measure:1180px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Source Serif 4",Georgia,serif;font-weight:400;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--measure);margin:0 auto;padding:0 32px}
+  h1,h2,h3,.disp{font-family:"Arimo",Helvetica,Arial,sans-serif;font-weight:700;letter-spacing:-0.02em;line-height:1.08;margin:0}
+  h1{font-size:clamp(38px,5.4vw,68px)}
+  h2{font-size:clamp(28px,3.6vw,46px)}
+  h3{font-size:19px;letter-spacing:-0.01em}
+  p{margin:0 0 1.1em}
+  a{color:inherit}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin:0 0 22px}
+  .eyebrow.dim{color:#7C8A8A}
+  .eyebrow.hot{color:var(--orange)}
+  .lede{font-size:19px;color:var(--ink-soft);max-width:52ch}
+  :focus-visible{outline:2px solid var(--orange);outline-offset:3px}
+
+  /* nav */
+  nav{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(242,242,242,.94);backdrop-filter:blur(8px);z-index:30}
+  .navin{display:flex;align-items:center;justify-content:space-between;height:70px;gap:32px}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+  .brand .mark{width:34px;height:34px;border-radius:50% 50% 45% 45%;background:var(--ink);color:#fff;display:grid;place-items:center;font-family:"Arimo";font-weight:700;font-size:10px;letter-spacing:-.04em}
+  .brand .mark span{color:var(--orange)}
+  .brand .word{font-family:"Arimo";font-weight:700;font-size:19px;letter-spacing:-0.03em}
+  .brand .word span{color:var(--orange)}
+  .navlinks{display:flex;gap:26px;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.06em}
+  .navlinks a{text-decoration:none;color:var(--ink-soft);padding:4px 0;border-bottom:1px solid transparent}
+  .navlinks a:hover{color:var(--ink);border-bottom-color:var(--ink)}
+  .navlinks a.on{color:var(--accent);border-bottom-color:var(--accent)}
+  .navlinks a.new::after{content:"new";margin-left:6px;font-size:9px;background:var(--orange);color:var(--ink);padding:1px 5px;border-radius:2px;letter-spacing:.1em}
+  .menu{display:none;background:none;border:1px solid var(--line);font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:8px 12px;cursor:pointer;color:var(--ink)}
+
+  /* hero */
+  .hero{padding:104px 0 80px}
+  .herogrid{display:grid;grid-template-columns:1.2fr .8fr;gap:64px;align-items:end}
+  .hero h1 em{font-family:"Source Serif 4";font-style:italic;font-weight:300}
+  .heromid{font-family:"Arimo";font-weight:400;font-size:clamp(26px,3vw,38px);line-height:1.25;color:var(--accent);margin:26px 0 0}
+  .herofoot{display:flex;flex-wrap:wrap;gap:40px;align-items:flex-end;justify-content:space-between;margin-top:52px}
+  .herofoot .lede b{color:var(--ink);font-weight:400;font-family:"Arimo"}
+  .btn{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;border:1px solid var(--ink);padding:14px 24px;transition:.2s;color:var(--ink)}
+  .btn:hover{background:var(--ink);color:var(--paper)}
+  .btn.fill{background:var(--accent);border-color:var(--accent);color:#fff}
+  .btn.fill:hover{background:var(--ink);border-color:var(--ink)}
+  .btn.hot{background:var(--orange);border-color:var(--orange);color:var(--ink)}
+  .btn.hot:hover{background:#d98200;border-color:#d98200;color:var(--ink)}
+  .kaicard{background:var(--white);border:1px solid var(--line);padding:22px;font-family:"Arimo",sans-serif}
+  .kaicard .head{display:flex;align-items:center;gap:10px;font-weight:700;margin-bottom:16px}
+  .kaicard .msg{background:var(--paper);border:1px solid var(--line);padding:12px 14px;font-size:14px;margin-bottom:10px;line-height:1.5}
+  .kaicard .msg.q{background:var(--accent);color:#fff;border-color:var(--accent);margin-left:40px}
+  .kaicard .ask{display:flex;justify-content:space-between;align-items:center;margin-top:14px;border:1px solid var(--line);padding:10px 14px;font-size:13px;color:var(--ink-soft);font-family:"IBM Plex Mono";letter-spacing:.06em}
+  .kaicard .ask span{color:var(--orange);font-weight:700}
+  .orb{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#3FA38C,var(--orange));flex:none;position:relative}
+  .orb::after{content:"";position:absolute;inset:8px 9px 8px 12px;background:var(--ink);border-radius:50% 50% 50% 0}
+
+  /* announcement band */
+  .band{background:var(--ink);color:var(--paper);padding:80px 0}
+  .band .eyebrow{color:var(--orange)}
+  .bandgrid{display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:end}
+  .band h2{color:#fff}
+  .band p{color:#AEBBBD;margin-bottom:0}
+  .bandrule{height:1px;background:rgba(255,255,255,.14);border:0;margin:52px 0 46px}
+  .bandbig{font-size:clamp(30px,4vw,52px);line-height:1.06}
+  .bandbig span{color:#6F8285}
+  .bandside p{font-size:18px;margin-bottom:14px}
+  .bandside p.strong{color:#fff;font-family:"Arimo";font-size:20px;letter-spacing:-.01em}
+  .bandbtns{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+  .band .btn{border-color:rgba(255,255,255,.4);color:#fff}
+  .band .btn:hover{background:#fff;color:var(--ink);border-color:#fff}
+  .band .btn.hot{border-color:var(--orange);color:var(--ink);background:var(--orange)}
+  .band .btn.hot:hover{background:#d98200;border-color:#d98200}
+
+  /* continuum */
+  .cont{padding:96px 0;background:var(--white)}
+  .track{position:relative;margin:56px 0 0;padding-top:46px}
+  .track .line{position:absolute;top:0;left:0;right:0;height:1px;background:var(--line)}
+  .track .fill{position:absolute;top:0;left:0;height:2px;background:var(--orange);width:0;transition:width 1.4s cubic-bezier(.4,0,.1,1)}
+  .track .oloid{position:absolute;top:-9px;left:0;width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#3FA38C,var(--orange));transition:left 1.4s cubic-bezier(.4,0,.1,1)}
+  .stages{display:grid;grid-template-columns:repeat(3,1fr);gap:44px}
+  .stage .n{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.2em;color:#7C8A8A;display:block;margin-bottom:12px}
+  .stage h3{margin-bottom:10px}
+  .stage p{font-size:15px;color:var(--ink-soft);margin:0}
+  .stage.new h3{color:var(--accent)}
+  .contfoot{margin-top:56px;padding-top:26px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;align-items:center}
+  .contfoot .claim{font-family:"Arimo";font-size:22px;letter-spacing:-.02em}
+
+  /* generic */
+  section{border-top:1px solid var(--line)}
+  .sec{padding:92px 0}
+  .sec.white{background:var(--white)}
+  .two{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px}
+  .shifts{display:grid;grid-template-columns:repeat(2,1fr);gap:0 44px}
+  .shift{padding:18px 0;border-bottom:1px solid var(--line);display:flex;gap:16px;align-items:baseline}
+  .shift span{font-family:"IBM Plex Mono",monospace;font-size:11px;color:#7C8A8A;letter-spacing:.14em}
+  .shift p{margin:0;font-size:16px;font-family:"Arimo";font-weight:700;font-size:15px}
+  .shift small{display:block;font-size:14px;color:var(--ink-soft);margin-top:4px;line-height:1.5}
+  .shift.new p{color:var(--accent)}
+
+  /* intent */
+  .intent{background:var(--accent);color:#fff}
+  .intent .eyebrow{color:#FFD08A}
+  .intent h2{color:#fff}
+  .intentgrid{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px;align-items:start}
+  .intenttxt{font-weight:300;font-size:clamp(19px,2vw,24px);line-height:1.5}
+  .intenttxt p{margin:0 0 .9em}
+  .intenttxt .rule{font-weight:400;color:#FFD08A}
+  .intenttxt .close{font-size:.78em;color:rgba(255,255,255,.7);margin-top:1.6em;font-family:"IBM Plex Mono";letter-spacing:.06em}
+  .intent .btn{border-color:rgba(255,255,255,.5);color:#fff}
+  .intent .btn:hover{background:#fff;color:var(--accent);border-color:#fff}
+
+  /* impacts */
+  .modal{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin:40px 0 20px}
+  .modal div{background:var(--white);padding:18px 22px}
+  .modal b{display:block;font-family:"Arimo";font-size:15px}
+  .modal span{font-size:14px;color:var(--ink-soft)}
+  .modal .soon span{color:var(--orange);font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+  .films{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:20px}
+  .film{text-decoration:none;background:var(--white);border:1px solid var(--line);display:block}
+  .film img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;filter:saturate(.85)}
+  .film .cap{padding:14px 16px 16px}
+  .film .cap b{display:block;font-family:"Arimo";font-size:14px;line-height:1.3}
+  .film .cap span{font-family:"IBM Plex Mono";font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+  .impnote{font-size:16px;color:var(--ink-soft);max-width:70ch;margin:22px 0 0}
+
+  /* suite board (inside impacts) */
+  .suitehead{margin-top:80px;padding-top:56px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px}
+  .kai-row{display:flex;align-items:center;gap:16px;background:var(--white);border:1px solid var(--line);border-left:3px solid var(--orange);padding:16px 20px;margin:40px 0 14px}
+  .kai-row .orb{width:40px;height:40px}.kai-row .orb::after{inset:11px 13px 11px 17px}
+  .kai-row h3{font-size:16px}.kai-row p{margin:2px 0 0;font-size:14px;color:var(--ink-soft)}
+  .legend{display:flex;gap:18px;font-family:"IBM Plex Mono";font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#7C8A8A;margin-bottom:14px}
+  .legend span{display:inline-flex;align-items:center;gap:7px}.legend i{width:22px;border-top:2px solid var(--orange)}.legend i.in{border-top:2px dashed var(--accent)}
+  .board{display:grid;grid-template-columns:1fr 340px;gap:24px;position:relative;align-items:start}
+  #wires{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;overflow:visible}
+  #wires path{fill:none;stroke-linecap:round;opacity:0;transition:opacity .3s}
+  #wires path.show{opacity:1}#wires path.out{stroke:var(--orange);stroke-width:2}#wires path.in{stroke:var(--accent);stroke-width:1.6;stroke-dasharray:2 6}
+  @media(prefers-reduced-motion:no-preference){#wires path.out.show{stroke-dasharray:6 6;animation:flow 1.1s linear infinite}}
+  @keyframes flow{to{stroke-dashoffset:-24}}
+  .lanes{display:flex;flex-direction:column;gap:14px;position:relative;z-index:2}
+  .lane{background:var(--white);border:1px solid var(--line);padding:16px}
+  .lane-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;font-family:"Arimo"}
+  .lane-head .bar{width:4px;height:18px}.lane-head h3{font-size:15px}
+  .lane-head .note{margin-left:auto;font-family:"IBM Plex Mono";font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#7C8A8A}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:10px}
+  .tile{position:relative;text-align:left;cursor:pointer;background:var(--paper);border:1px solid transparent;padding:14px 12px 12px;color:var(--ink);font-family:"Arimo";transition:border-color .15s,background .15s}
+  .tile:hover{border-color:var(--accent)}
+  .tile .ti{width:40px;height:40px;border-radius:9px;display:grid;place-items:center;margin-bottom:10px;color:#fff}.tile .ti svg{width:20px;height:20px}
+  .tile h4{font-size:13.5px;font-weight:700;line-height:1.2;margin:0}.tile .d{font-size:12px;color:var(--ink-soft);margin-top:3px}
+  .tile.dim{opacity:.35}.tile.active{background:#fff;border-color:var(--orange);box-shadow:0 0 0 1px var(--orange)}.tile.link{border-color:rgba(0,86,86,.6);background:#fff}
+  .badge{position:absolute;top:8px;right:8px;font-size:9px;font-family:"IBM Plex Mono";letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border-radius:999px;display:none}
+  .tile.link .badge{display:inline-block}.badge.consumes{background:var(--accent-soft);color:var(--accent)}.badge.produces{background:rgba(245,149,4,.18);color:#9a5d00}
+  .side{position:sticky;top:90px;z-index:2}
+  .detail{background:var(--ink);color:#fff;padding:22px;font-family:"Arimo"}
+  .detail .lane-name{font-family:"IBM Plex Mono";font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);margin-bottom:8px}
+  .detail h3{color:#fff;font-size:20px;margin-bottom:4px}.detail .blurb{color:rgba(255,255,255,.72);font-size:13.5px;margin:0}
+  .io{margin-top:18px;padding-top:14px;border-top:1px solid rgba(255,255,255,.12)}
+  .io h4{font-size:12px;color:rgba(255,255,255,.62);font-weight:500;margin:0 0 8px}
+  .io ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+  .io li{font-size:13px;display:flex;gap:8px;line-height:1.4}.io li b{font-weight:700;flex:none;color:var(--orange)}.io li b.kb{color:#5FC2AE}
+  .kb-note{display:inline-flex;align-items:center;gap:8px;font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.08em;color:var(--accent);background:var(--accent-soft);padding:8px 14px;margin-top:14px}
+
+  /* oloid principles */
+  .princ{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:44px}
+  .pr{background:var(--white);padding:26px 22px}
+  .pr span{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;color:#7C8A8A}
+  .pr h3{font-size:16px;margin:10px 0 6px}
+  .pr p{font-size:14px;color:var(--ink-soft);margin:0}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:56px;padding-top:40px;border-top:1px solid var(--line)}
+  .steps h3{margin-bottom:10px;color:var(--accent)}.steps p{font-size:15px;color:var(--ink-soft);margin:0}
+
+  /* founder */
+  .founder{background:var(--paper-dim)}
+  .fgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:56px;margin-top:44px}
+  .fcard{border-top:2px solid var(--ink);padding-top:20px}
+  .fcard .role{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+  .fcard p{font-size:15.5px;color:var(--ink-soft)}.fcard p:last-child{margin-bottom:0}
+
+  footer{background:var(--ink);color:#AEBBBD;padding:72px 0 40px}
+  footer h2{color:#fff;margin-bottom:18px}
+  .fbot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:18px;margin-top:56px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14);font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.08em}
+  .fbot a{color:#AEBBBD;text-decoration:none;margin-left:16px}.fbot a:hover{color:var(--orange)}
+
+  @media (max-width:900px){
+    .wrap{padding:0 20px}
+    .menu{display:block}
+    .navlinks{display:none;position:absolute;left:0;right:0;top:70px;background:var(--paper);flex-direction:column;gap:0;padding:8px 20px 16px;border-bottom:1px solid var(--line)}
+    .navlinks.open{display:flex}.navlinks a{padding:12px 0;border-bottom:1px solid var(--line)}
+    .herogrid,.bandgrid,.two,.fgrid,.intentgrid,.board{grid-template-columns:1fr;gap:34px}
+    .side{position:static}#wires{display:none}
+    .stages,.princ,.shifts,.films,.steps{grid-template-columns:1fr}
+    .modal{grid-template-columns:repeat(2,1fr)}
+    .track{padding-top:38px}.hero{padding:64px 0 56px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+  /* inner-page hero */
+  .phero{padding:96px 0 72px}
+  .phero h1{font-size:clamp(34px,4.6vw,58px);max-width:24ch}
+  .phero .lede{margin-top:22px}
+  .phero.dark{background:var(--ink);color:var(--paper)}
+  .phero.dark h1{color:#fff}.phero.dark .eyebrow{color:var(--orange)}.phero.dark .lede{color:#AEBBBD}
+  .phero.dark .btn{border-color:rgba(255,255,255,.4);color:#fff}.phero.dark .btn:hover{background:#fff;color:var(--ink)}
+  .phero.teal{background:var(--accent);color:#fff}
+  .phero.teal h1{color:#fff}.phero.teal .eyebrow{color:#FFD08A}.phero.teal .lede{color:rgba(255,255,255,.82)}
+  .prose{max-width:66ch;font-size:18px;color:var(--ink-soft)}
+  .prose strong{color:var(--ink);font-weight:400;font-family:"Arimo"}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:44px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:44px}
+  .cell{background:var(--white);padding:28px 24px}
+  .cell span{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.16em;color:#7C8A8A;display:block;margin-bottom:10px}
+  .cell h3{font-size:17px;margin-bottom:8px}.cell p{font-size:15px;color:var(--ink-soft);margin:0}
+  .cta{padding:92px 0;text-align:center;background:var(--white)}
+  .cta .lede{margin:18px auto 28px}
+  .form label{display:block;font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:18px 0 6px}
+  .form input,.form textarea,.form select{width:100%;border:1px solid var(--line);background:#fff;padding:12px 14px;font:inherit;font-size:16px;color:var(--ink)}
+  .form textarea{min-height:140px;resize:vertical}
+  .form .btn{margin-top:24px}
+  @media (max-width:900px){.grid3,.grid2{grid-template-columns:1fr}.phero{padding:60px 0 48px}}
+
+  .page{display:none}.page.active{display:block}
+
+
+  /* ===== Immersive layer ===== */
+  :root{--r:22px;--r-sm:14px;--teal2:#0F8C85;--mint:#5FC2AE;--glow:0 30px 80px -30px rgba(16,40,48,.35)}
+  body{background:#fff}
+  h1,h2{letter-spacing:-.03em;font-weight:700}
+  h1{font-size:clamp(46px,7vw,96px);line-height:1}
+  h2{font-size:clamp(32px,4.4vw,58px);line-height:1.04}
+  .lede{font-size:clamp(18px,1.5vw,21px)}
+  .eyebrow{letter-spacing:.2em}
+  .grad{background:linear-gradient(90deg,var(--accent),var(--teal2) 45%,var(--orange));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  /* nav — frosted */
+  nav{background:rgba(255,255,255,.72);border-bottom:1px solid rgba(16,40,48,.08);backdrop-filter:saturate(180%) blur(18px);-webkit-backdrop-filter:saturate(180%) blur(18px)}
+  .navin{height:64px}
+  .navlinks{font-family:"Arimo";font-size:14px;letter-spacing:0;gap:6px}
+  .navlinks a{padding:8px 14px;border:0;border-radius:999px;color:var(--ink-soft)}
+  .navlinks a:hover{background:rgba(16,40,48,.06);color:var(--ink);border:0}
+  .navlinks a.on{background:var(--ink);color:#fff;border:0}
+  .navlinks a.new::after{background:var(--orange);color:var(--ink);border-radius:999px;padding:2px 7px;letter-spacing:.04em;text-transform:none;font-family:"Arimo";font-weight:700;font-size:10px}
+
+  /* buttons — pills */
+  .btn{border-radius:999px;font-family:"Arimo";font-weight:700;letter-spacing:0;text-transform:none;font-size:15px;padding:14px 26px;border-width:1.5px}
+  .btn.fill{background:linear-gradient(135deg,var(--accent),var(--teal2));border-color:transparent;box-shadow:0 12px 30px -12px rgba(0,86,86,.6)}
+  .btn.fill:hover{background:var(--ink);box-shadow:none}
+  .btn.hot{background:linear-gradient(135deg,#FFB13B,var(--orange));border-color:transparent;box-shadow:0 12px 30px -12px rgba(245,149,4,.7)}
+
+  /* hero — gradient mesh */
+  .hero{position:relative;overflow:hidden;padding:120px 0 110px;
+    background:
+      radial-gradient(900px 600px at 8% 0%,rgba(0,86,86,.18),transparent 60%),
+      radial-gradient(700px 500px at 95% 20%,rgba(245,149,4,.20),transparent 60%),
+      radial-gradient(600px 500px at 60% 110%,rgba(95,194,174,.22),transparent 60%),#fff}
+  .hero .eyebrow{display:inline-block;background:rgba(16,40,48,.06);border-radius:999px;padding:7px 14px;color:var(--ink);font-family:"Arimo";letter-spacing:0;text-transform:none;font-size:13px;font-weight:700}
+  .hero h1 em{color:var(--accent)}
+  .heromid{font-size:clamp(28px,3.4vw,44px);font-weight:700;line-height:1.15;background:linear-gradient(90deg,var(--accent),var(--teal2) 50%,var(--orange));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .kaicard{border-radius:var(--r);border:1px solid rgba(16,40,48,.08);box-shadow:var(--glow);background:rgba(255,255,255,.8);backdrop-filter:blur(12px)}
+  .kaicard .msg{border-radius:14px 14px 14px 4px;border:0;background:#F2F5F5}
+  .kaicard .msg.q{border-radius:14px 14px 4px 14px;background:linear-gradient(135deg,var(--accent),var(--teal2))}
+  .kaicard .ask{border-radius:999px;font-family:"Arimo";letter-spacing:0;text-transform:none;font-size:14px}
+  .orb{background:conic-gradient(from 210deg,var(--mint),var(--accent),var(--orange),#FFB13B,var(--mint));box-shadow:0 8px 20px -8px rgba(0,86,86,.6)}
+
+  /* dark bands — rounded, glowing */
+  .band,.intent,footer{position:relative;overflow:hidden}
+  .band{background:radial-gradient(800px 500px at 90% 10%,rgba(245,149,4,.28),transparent 60%),radial-gradient(700px 500px at 0% 100%,rgba(95,194,174,.18),transparent 60%),linear-gradient(160deg,#0D2A30,#102830 60%,#0B3A3A);padding:110px 0}
+  .band .bandbig span{color:rgba(255,255,255,.45)}
+  .bandbig{font-size:clamp(36px,5.2vw,72px)}
+  .intent{background:radial-gradient(700px 500px at 100% 0%,rgba(255,208,138,.25),transparent 60%),linear-gradient(160deg,#005656,#0F8C85)}
+  footer{background:radial-gradient(800px 500px at 10% 0%,rgba(0,86,86,.6),transparent 60%),#102830}
+
+  /* sections */
+  .sec{padding:110px 0}
+  section{border-top:0}
+  .cont{padding:110px 0;background:#fff}
+  .track .fill{height:3px;background:linear-gradient(90deg,var(--accent),var(--orange))}
+  .track .oloid{width:22px;height:22px;top:-10px;box-shadow:0 0 0 6px rgba(245,149,4,.18)}
+  .stage.new h3{color:var(--accent)}
+  .contfoot .claim{font-size:clamp(22px,2.6vw,32px)}
+
+  /* cards */
+  .shift{border:0;background:#F5F7F7;border-radius:var(--r-sm);padding:18px 20px;margin-bottom:10px}
+  .shift.new{background:linear-gradient(135deg,rgba(0,86,86,.10),rgba(245,149,4,.14))}
+  .modal,.princ,.grid3,.grid2{gap:14px;background:none;border:0}
+  .modal div,.pr,.cell{border-radius:var(--r-sm);border:1px solid rgba(16,40,48,.08);box-shadow:0 10px 30px -22px rgba(16,40,48,.4)}
+  .pr,.cell{padding:30px 26px}
+  .pr:hover,.cell:hover{transform:translateY(-3px);transition:.25s}
+  .princ .pr:nth-child(1) h3{color:var(--accent)}.princ .pr:nth-child(2) h3{color:#7A5AF8}.princ .pr:nth-child(3) h3{color:#0F8C85}
+  .princ .pr:nth-child(4) h3{color:#4B7BE5}.princ .pr:nth-child(5) h3{color:#D08400}.princ .pr:nth-child(6) h3{color:#E0576F}
+  .film{border-radius:var(--r);overflow:hidden;border:1px solid rgba(16,40,48,.08);box-shadow:var(--glow);transition:transform .25s}
+  .film:hover{transform:translateY(-4px)}
+  .film img{filter:none}
+  .steps h3{font-size:24px;background:linear-gradient(90deg,var(--accent),var(--orange));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .founder{background:linear-gradient(180deg,#fff,#F2F5F5)}
+  .fcard{border-top:0;background:#fff;border-radius:var(--r);padding:28px;box-shadow:var(--glow)}
+
+  /* suite board — colourful tiles */
+  .kai-row{border-radius:var(--r);border:1px solid rgba(16,40,48,.08);border-left:1px solid rgba(16,40,48,.08);box-shadow:var(--glow);background:linear-gradient(135deg,#fff,#F2F7F6)}
+  .lane{border-radius:var(--r);border:1px solid rgba(16,40,48,.08);box-shadow:var(--glow)}
+  .tile{border-radius:var(--r-sm);background:#fff;border:1px solid rgba(16,40,48,.08);transition:transform .2s,box-shadow .2s}
+  .tile:hover{transform:translateY(-3px);box-shadow:0 14px 30px -18px rgba(16,40,48,.5)}
+  .tile .ti{width:44px;height:44px;border-radius:12px;box-shadow:0 8px 18px -8px rgba(16,40,48,.5)}
+  .tile.active{border-color:transparent;box-shadow:0 0 0 2px var(--orange),0 14px 30px -18px rgba(245,149,4,.7)}
+  .tile.link{background:#fff}
+  .detail{border-radius:var(--r);background:radial-gradient(500px 300px at 100% 0%,rgba(245,149,4,.25),transparent 60%),#102830}
+  .kb-note{border-radius:999px}
+  .phero{padding:120px 0 90px;background:radial-gradient(900px 600px at 0% 0%,rgba(0,86,86,.14),transparent 60%),radial-gradient(700px 500px at 100% 100%,rgba(245,149,4,.16),transparent 60%),#fff}
+  .phero.dark{background:radial-gradient(800px 500px at 90% 10%,rgba(245,149,4,.3),transparent 60%),linear-gradient(160deg,#0D2A30,#102830 60%,#0B3A3A)}
+  .phero.teal{background:radial-gradient(700px 500px at 100% 0%,rgba(255,208,138,.28),transparent 60%),linear-gradient(160deg,#005656,#0F8C85)}
+  .cta{background:linear-gradient(180deg,#fff,#F2F5F5)}
+  .form input,.form textarea,.form select{border-radius:12px}
+
+  /* reveal */
+  .rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+  .rv.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}}
+
+  /* Oloid principle tabs */
+  .oloidband{background:radial-gradient(900px 600px at 100% 0%,rgba(245,149,4,.22),transparent 60%),radial-gradient(700px 500px at 0% 100%,rgba(0,86,86,.55),transparent 60%),#0B1A1E}
+  .ptabs-wrap{display:grid;grid-template-columns:400px 1fr;gap:28px;margin-top:48px;align-items:start}
+  .ptabs{display:flex;flex-direction:column;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--r);overflow:hidden}
+  .ptab{display:flex;align-items:center;gap:16px;text-align:left;background:none;border:0;border-left:3px solid transparent;border-bottom:1px solid rgba(255,255,255,.06);padding:20px 22px;color:rgba(255,255,255,.55);cursor:pointer;font-family:"Arimo";transition:background .2s,color .2s}
+  .ptab:last-child{border-bottom:0}
+  .ptab:hover{background:rgba(255,255,255,.05);color:#fff}
+  .ptab.on{background:rgba(255,255,255,.08);color:#fff;border-left-color:var(--orange)}
+  .ptab .pn{font-family:"IBM Plex Mono";font-size:12px;letter-spacing:.1em;color:rgba(255,255,255,.4);width:26px;flex:none}
+  .ptab.on .pn{color:var(--orange)}
+  .ptab b{display:block;font-size:16px;font-weight:700}
+  .ptab small{display:block;font-size:13px;color:rgba(255,255,255,.45);margin-top:3px}
+  .ptab.on small{color:var(--orange)}
+  .ptab .ar{margin-left:auto;color:rgba(255,255,255,.3)}.ptab.on .ar{color:var(--orange)}
+  .ppanel{padding:10px 8px 0;min-height:420px;animation:pfade .35s ease}
+  @keyframes pfade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .ppanel .phead{display:flex;align-items:center;gap:20px;margin-bottom:34px}
+  .ppanel .pbadge{width:70px;height:70px;border-radius:16px;background:rgba(245,149,4,.12);border:1px solid rgba(245,149,4,.5);display:grid;place-items:center;font-family:"Arimo";font-weight:700;color:var(--orange);font-size:20px;flex:none}
+  .ppanel h3{font-size:clamp(28px,3vw,40px);color:#fff;letter-spacing:-.02em}
+  .ppanel .psub{color:var(--orange);font-family:"Arimo";font-size:17px;margin-top:4px}
+  .ppanel .pquote{border-left:2px solid var(--orange);padding:6px 0 6px 20px;font-style:italic;font-weight:300;font-size:clamp(18px,1.8vw,22px);color:rgba(255,255,255,.85);margin:0 0 30px}
+  .ppanel .plabel{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--orange);margin:0 0 16px}
+  .ppanel ol{list-style:none;margin:0 0 30px;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:14px 40px}
+  .ppanel ol li{display:flex;gap:14px;font-family:"Arimo";font-size:16.5px;color:rgba(255,255,255,.9);line-height:1.5}
+  .ppanel ol li span{font-family:"IBM Plex Mono";font-size:11px;color:rgba(245,149,4,.7);letter-spacing:.1em;flex:none;padding-top:5px}
+  .ppanel .pans{background:rgba(255,255,255,.04);border:1px solid rgba(245,149,4,.35);border-radius:var(--r-sm);padding:22px 26px}
+  .ppanel .pans p{margin:0 0 10px;font-family:"Arimo";font-size:16px;color:#fff}.ppanel .pans p:last-child{margin:0}
+  .ppanel .pans p::before{content:"✓";color:var(--orange);font-weight:700;margin-right:12px}
+  .ppanel .pans b{color:#FFD08A;font-weight:700}
+  @media (max-width:900px){.ptabs-wrap{grid-template-columns:1fr}.ppanel ol{grid-template-columns:1fr}.ppanel{min-height:0}}
+
+
+  /* ===== KStrategy& logo + home Oloid enhancement ===== */
+  .ks-logo{
+    display:inline-block;
+    background-image:url("data:image/png;base64,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");
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:contain;
+    aspect-ratio:505 / 102;
+    vertical-align:middle;
+    flex:none;
+  }
+  .ks-logo-nav{width:178px;height:auto}
+  .ks-logo-title{width:clamp(190px,21vw,300px);margin:0 .08em;transform:translateY(.06em)}
+  .ks-logo-inline{width:116px;margin:0 .18em;transform:translateY(.12em)}
+  .ks-logo-eyebrow{width:122px;margin-left:6px;transform:translateY(.10em)}
+  .ks-logo-contact{width:185px;margin-bottom:12px}
+  .ks-logo-footer{width:108px;margin:0 4px;transform:translateY(.12em)}
+  .brand{min-width:178px}
+  .brand .ks-logo{display:block}
+  .hero .herogrid{grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr);align-items:center}
+  .hero-side{display:flex;flex-direction:column;gap:18px;min-width:0}
+  .hero-side .kaicard{position:relative;z-index:2}
+  .film .cap b .ks-logo-inline{width:104px}
+  .eyebrow .ks-logo{vertical-align:middle}
+  @media (max-width:900px){
+    .ks-logo-nav{width:154px}
+    .hero .herogrid{grid-template-columns:1fr}
+    .hero-side{max-width:560px;width:100%;margin:0 auto}
+    .ks-logo-title{width:clamp(175px,48vw,260px)}
+  }
+  @media (max-width:560px){
+    .ks-logo-inline{width:96px}
+    .ks-logo-footer{width:92px}
+  }
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap navin">
+    <a class="brand" href="#index" aria-label="KStrategy& home"><span class="ks-logo ks-logo-nav" role="img" aria-label="KStrategy&"></span></a>
+    <button class="menu" id="menu" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <div class="navlinks" id="navlinks">
+      <a href="#index" class="on">Home</a><a href="#humanteconomics">Humanteconomics</a><a href="#our-intent">Our intent</a><a href="#oloid-framework">Oloid framework</a><a href="#impacts">Impacts</a><a href="#discovery" class="new">Discovery</a><a href="#quantum">Quantum</a><a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+<div class="page" data-page="index"><header class="hero" id="top">
+  <div class="wrap herogrid">
+    <div>
+      <p class="eyebrow">Infrastructure - Systems - Technology - Discovery</p>
+      <h1>At <em>KStrategy&amp;,</em> we return to first principles.</h1>
+      <p class="heromid">To Geometry.<br>To Motion.<br>To the Oloid.</p>
+      <div class="herofoot">
+        <p class="lede" style="margin:0">Rooted in <b>Humanteconomics</b>, our human‑first, <b>privacy‑centric architecture</b> puts people, not data, at the centre.</p>
+        <a class="btn" href="#kai">Meet K.AI →</a>
+      </div>
+    </div>
+    <div class="hero-side">
+      <aside class="kaicard" id="kai" aria-label="K.AI">
+        <div class="head"><span class="orb"></span>K.AI</div>
+        <div class="msg">👋 Hello! Ask me anything about KStrategy&amp;.</div>
+        <div class="msg q">What makes KStrategy&amp; different?</div>
+        <div class="msg">We apply the Oloid Framework — a geometry-driven approach that returns organisations to first principles, putting people before data.</div>
+        <div class="ask">Ask K.AI anything <span>→</span></div>
+      </aside>
+    </div>
+  </div>
+</header><section class="band" id="discovery">
+  <div class="wrap">
+    <p class="eyebrow">New</p>
+    <h2>K.AI moves <span style="color:var(--orange)">upstream.</span></h2>
+    <p style="margin-top:16px;font-size:19px;max-width:44ch">From access to discovery. The same intelligence, applied earlier.</p>
+    <hr class="bandrule">
+    <div class="bandgrid">
+      <div>
+        <p class="eyebrow">K.AI · Discovery</p>
+        <h2 class="bandbig">Molecules are geometry.<br><span>So is everything else.</span></h2>
+      </div>
+      <div class="bandside">
+        <p>Discovery has always been a search problem dressed up as a chemistry problem.</p>
+        <p class="strong">We return it to first principles.</p>
+        <div class="bandbtns">
+          <a class="btn hot" href="#discovery">Explore K.AI Discovery →</a>
+          <a class="btn" href="#continuum">See the continuum →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><section class="cont" id="continuum">
+  <div class="wrap">
+    <p class="eyebrow dim">One continuous line</p>
+    <h2>From <span class="grad">discovery</span> to access.</h2>
+    <p class="lede" style="margin-top:18px">Most of the industry treats discovery and access as two conversations, held years apart. A molecule that cannot be reimbursed was never viable — only unfinished.</p>
+    <div class="track" id="track">
+      <div class="line"></div><div class="fill" id="fill"></div><div class="oloid" id="knob"></div>
+      <div class="stages">
+        <div class="stage new"><span class="n">01</span><h3>Discovery</h3><p>Target identification · Candidate prioritisation · Mechanism reasoning</p></div>
+        <div class="stage new"><span class="n">02</span><h3>Development</h3><p>Trial design intelligence · Evidence gap mapping · Comparator strategy</p></div>
+        <div class="stage"><span class="n">03</span><h3>Access</h3><p>AccessOPTI — Landscape · CEA · BIA · Pricing &amp; Tender · Access Loop</p></div>
+      </div>
+    </div>
+    <div class="contfoot">
+      <div class="claim">One core. One memory. One intelligence.</div>
+      <a class="btn fill" href="#impacts/suite">See the suite →</a>
+    </div>
+  </div>
+</section><section class="sec" id="humanteconomics">
+  <div class="wrap two">
+    <div>
+      <p class="eyebrow dim">Our philosophy</p>
+      <h2>Humanteconomics</h2>
+      <p class="lede" style="margin-top:18px">Shaping a Better World for Future Generations.</p>
+      <p style="color:var(--ink-soft)">This is not just a concept—it is a generational commitment to building a better world for those who come after us.</p>
+      <a class="btn" href="#humanteconomics">Explore Humanteconomics →</a>
+    </div>
+    <div class="prose" style="align-self:center">
+      <p>Six shifts define the ground we build on — from systems-first to human-first, volatile geo-economic realities, value-based healthcare, healthcare disparities, the tech catalyst of AI, ML and quantum, and a future built for our children's children.</p>
+      <p>Each is set out in full on the Humanteconomics page.</p>
+    </div>
+  </div>
+</section><section class="sec intent" id="intent">
+  <div class="wrap intentgrid">
+    <div>
+      <p class="eyebrow">Our intent</p>
+      <h2>Where Human Intention Meets Intelligence Built for Humanity.</h2>
+      <p style="margin-top:18px;color:rgba(255,255,255,.8)">We begin with a question older than technology itself: what does it mean to build intelligence that serves humanity — not consumes it?</p>
+      <a class="btn" href="#our-intent">Read our intent →</a>
+      
+    </div>
+    <div class="intenttxt">
+      <p>We reject the extractive logic of centralised technologies. We refuse the belief that intelligence requires surrendering data.</p>
+      <p>We choose a different path — one rooted in HumanTeconomics, where people remain sovereign, where privacy is a foundation rather than a feature, and where technology strengthens human dignity instead of eroding it.</p>
+      <p>And through every phase, one principle remains unbroken:<br><span class="rule">Your intelligence stays within your environment.</span> It does not drift. It does not leak. It does not become someone else's asset.</p>
+      <p>We build for the long arc of time — for societal benefit measured not in quarters, but in generations. For a future worthy of our children's children.</p>
+      <p class="close">Our stance. Our intent. Our pursuit to unlearn and relearn.</p>
+    </div>
+  </div>
+</section><section class="sec" id="impacts">
+  <div class="wrap">
+    <p class="eyebrow dim">Our impacts</p>
+    <h2>K.AI is now <span class="grad">multimodal.</span></h2>
+    <p class="lede" style="margin-top:18px">Evolving toward sentiment and visual understanding — adapting to how people naturally think, communicate, and decide.</p>
+    <div class="modal">
+      <div><b>Reads</b><span>Text &amp; documents</span></div>
+      <div><b>Hears</b><span>Audio input</span></div>
+      <div><b>Speaks</b><span>Voice output</span></div>
+      <div class="soon"><b>Sees</b><span>Visual — upcoming</span></div>
+    </div>
+    <div class="films">
+      <a class="film" href="https://www.youtube.com/watch?v=JM2d70FySM8" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/JM2d70FySM8/hqdefault.jpg" alt="Reshaping Decision Making — K.AI 2.0 Smart Assistant"><div class="cap"><b>Reshaping Decision Making — K.AI 2.0 Smart Assistant</b><span>Watch</span></div></a>
+      <a class="film" href="https://www.youtube.com/watch?v=95YpAnTu9y4" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/95YpAnTu9y4/hqdefault.jpg" alt="AccessOPTI – BIA — Pharma Strategic Planning Tool"><div class="cap"><b>AccessOPTI – BIA — Pharma Strategic Planning Tool</b><span>Watch</span></div></a>
+      <a class="film" href="https://www.youtube.com/watch?v=DdBhuRZlLIc" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/DdBhuRZlLIc/hqdefault.jpg" alt="KStrategy& Product Launch"><div class="cap"><b><span class="ks-logo ks-logo-inline" role="img" aria-label="KStrategy&"></span> Product Launch</b><span>Watch</span></div></a>
+    </div>
+    <p class="impnote">K.AI 2.0 is built for the human-first era — amplifying individual capability for better decisions, stronger resilience, and more equitable outcomes.</p>
+
+    <div class="suitehead">
+      <div>
+        <p class="eyebrow hot">The suite</p>
+        <h2>One assistant. <span class="grad">Eleven connected apps.</span></h2>
+        <p class="lede" style="margin-top:14px">AccessOPTI for Market Access &amp; HEOR, connected Commercial apps, firewalled Medical Affairs — all on one K.AI knowledge base, running in your infrastructure.</p>
+      </div>
+      <a class="btn hot" href="#impacts/suite">Explore the suite →</a>
+    </div>
+  </div>
+</section><section class="sec white" id="beyond"><div class="wrap">
+  <p class="eyebrow dim">What we are working on — and beyond</p>
+  <h2>Today, next, <span class="grad">and the machines after that.</span></h2>
+  <p class="lede" style="margin-top:18px">One core. One memory. One intelligence — extended in three directions, in the order the evidence allows.</p>
+  <div class="grid3">
+    <div class="cell" style="border-top:4px solid var(--accent)"><span>Now · K.AI 2.0 &amp; the suite</span><h3>K.AI is multimodal, and eleven apps run on it.</h3><p>Reads, hears, speaks — and AccessOPTI, Commercial and Medical Affairs apps sharing one product record in your own infrastructure.</p><p style="margin-top:14px"><a href="#impacts" style="color:var(--accent);font-family:'Arimo';font-weight:700;text-decoration:none">See our impacts →</a></p></div>
+    <div class="cell" style="border-top:4px solid var(--orange)"><span>Next · K.AI Discovery</span><h3>The same intelligence, applied upstream.</h3><p>Target identification, candidate prioritisation and mechanism reasoning — judged on the whole journey a molecule has to make, not just the first step.</p><p style="margin-top:14px"><a href="#discovery" style="color:var(--orange);font-family:'Arimo';font-weight:700;text-decoration:none">Explore Discovery →</a></p></div>
+    <div class="cell" style="border-top:4px solid #6A5AE0"><span>Beyond · Quantum</span><h3>Some problems are not hard. They are wide.</h3><p>Classical now, quantum when it lands. Problems stated once, so the backend can change without a rewrite — and without loosening a single Oloid term.</p><p style="margin-top:14px"><a href="#quantum" style="color:#6A5AE0;font-family:'Arimo';font-weight:700;text-decoration:none">Read the quantum position →</a></p></div>
+  </div>
+</div></section>
+<section class="sec white" id="oloid">
+  <div class="wrap">
+    <p class="eyebrow dim">Our unique framework</p>
+    <h2>The Oloid framework, built to be human‑first, transparent, decentralised</h2>
+    <p class="lede" style="margin-top:18px">Oloid runs entirely in your infrastructure—no data sharing, no external calls. We're exploring blockchain tech to reinforce it. Discovery data is the most valuable asset a company owns. It should never be the price of using a tool.</p>
+    <a class="btn" href="#oloid-framework">Explore the Oloid Framework →</a><p class="lede" style="margin-top:34px;max-width:70ch">Six principles, each derived from the geometry of the oloid itself — continuous motion, balance by design, unbroken contact, transparency at every layer, decentralised architecture, and ethics in motion. Every one is explained in detail, with the questions it answers, on the Oloid Framework page.</p>
+  </div>
+</section><section class="sec founder">
+  <div class="wrap">
+    <p class="eyebrow dim">Why us</p>
+    <h2>Built by a scientist who has seen where molecules go to fail.</h2>
+    <p class="lede" style="margin-top:18px">Most medicines that fail do not fail in the laboratory. They fail years later, when the evidence a payer needs was never designed in.</p>
+    <div class="fgrid">
+      <div class="fcard"><div class="role">Science</div><p>Founded by Dr Keshalini Sabaratnam — DPhil, University of Oxford; postdoctoral research at Harvard Medical School in structural biology and antiviral drug discovery. Molecules understood as geometry first.</p></div>
+      <div class="fcard"><div class="role">Market access</div><p>Over a decade across academia, strategic market access and HTA consulting in pharma and healthcare, and drug-development data analytics — where a molecule's fate is decided long after the laboratory has finished with it.</p></div>
+    </div>
+  </div>
+</section></div>
+<div class="page" data-page="humanteconomics"><header class="phero"><div class="wrap">
+  <p class="eyebrow">Our philosophy</p><h1>Humanteconomics</h1>
+  <p class="lede" style="color:var(--ink);font-size:22px">Shaping a Better World for Future Generations.</p>
+  <p class="lede">This is not just a concept—it is a generational commitment to building a better world for those who come after us.</p>
+</div></header>
+<section class="sec" id="shifts">
+  <div class="wrap two">
+    <div>
+      <p class="eyebrow dim">Our philosophy</p>
+      <h2>Six shifts.</h2>
+      <p class="lede" style="margin-top:18px">What is changing, and why it matters.</p>
+      <p style="color:var(--ink-soft);font-size:16px">Humanteconomics is the ethic behind everything we build: intelligence that stays inside your environment, humans in control of every decision, and the question — who will this help? — asked before the molecule is chosen.</p>
+    </div>
+    <div class="shifts">
+      <div class="shift"><span>01</span><div><p>The Shift: From Systems-First to Human-First.</p><small>Technology built around systems asks people to adapt to it. Human-first design starts with the person making the decision.</small></div></div>
+      <div class="shift"><span>02</span><div><p>Navigating Volatile Geo-Economic Realities.</p><small>Budgets, supply chains and regulation move faster than annual plans. Strategy has to be re-run, not re-written.</small></div></div>
+      <div class="shift"><span>03</span><div><p>The Rise of Value-Based Healthcare.</p><small>Payment follows outcomes. Evidence of value has to be built into a product from the start, not assembled at launch.</small></div></div>
+      <div class="shift"><span>04</span><div><p>Closing the Gap: Tackling Healthcare Disparities.</p><small>Access is uneven within and between countries. Better decisions about price, evidence and reach are how the gap closes.</small></div></div>
+      <div class="shift"><span>05</span><div><p>The Tech Catalyst: AI, ML, Quantum &amp; More.</p><small>The tools now exist to reason over more evidence than any team can read. The question is who controls them, and whose data they run on.</small></div></div>
+      <div class="shift"><span>06</span><div><p>A Future Built for Our Children's Children.</p><small>Societal benefit measured not in quarters but in generations.</small></div></div>
+    </div>
+  </div>
+</section><section class="band"><div class="wrap bandgrid">
+  <div><p class="eyebrow">In practice</p><h2 class="bandbig">People, not data,<br><span>at the centre.</span></h2></div>
+  <div class="bandside"><p>Humanteconomics is the ethic behind everything we build: the Oloid Framework that keeps intelligence inside your environment, the suite that keeps humans in control of every decision, and K.AI Discovery that asks the human question — who will this help? — before the molecule is chosen.</p>
+  <div class="bandbtns"><a class="btn" href="#our-intent">Read our intent →</a><a class="btn hot" href="#oloid-framework">The Oloid Framework →</a></div></div>
+</div></section></div>
+<div class="page" data-page="our-intent"><header class="phero teal"><div class="wrap"><p class="eyebrow">Our intent</p><h1>Where Human Intention Meets Intelligence Built for Humanity.</h1></div></header>
+<section class="sec white"><div class="wrap">
+  <div class="intenttxt" style="max-width:34em;color:var(--ink)">
+    <p>We begin with a question older than technology itself:</p>
+    <p style="font-family:'Arimo';font-weight:700;color:var(--accent)">What does it mean to build intelligence that serves humanity — not consumes it?</p>
+    <p>This is the philosophy that shapes our technology.</p>
+    <p>We reject the extractive logic of centralised technologies.<br>We refuse the belief that intelligence requires surrendering data.</p>
+    <p>We choose a different path — one rooted in HumanTeconomics,<br>where people remain sovereign,<br>where privacy is a foundation rather than a feature,<br>and where technology strengthens human dignity instead of eroding it.</p>
+    <p>And through every phase, one principle remains unbroken:</p>
+    <p class="rule" style="color:var(--accent)">Your intelligence stays within your environment.<br>It does not drift.<br>It does not leak.<br>It does not become someone else's asset.</p>
+    <p>We build for the long arc of time —<br>for societal benefit measured not in quarters,<br>but in generations.</p>
+    <p>For a future worthy of our children's children.</p>
+    <p class="close" style="color:var(--ink-soft)">Our stance. Our intent. Our pursuit to unlearn and relearn.</p>
+  </div>
+</div></section></div>
+<div class="page" data-page="oloid-framework">
+<header class="phero"><div class="wrap">
+  <p class="eyebrow">Unique to <span class="ks-logo ks-logo-eyebrow" role="img" aria-label="KStrategy&"></span></p>
+  <h1>The Oloid Framework</h1>
+  <p class="lede" style="color:var(--ink);font-size:clamp(20px,2vw,26px)">A human-first, transparent, decentralised intelligence model</p>
+</div></header>
+
+<section class="sec white"><div class="wrap two" style="align-items:center">
+  <div>
+    <p class="eyebrow dim">People have real questions</p>
+    <h2 class="grad">Where does my data go?</h2>
+  </div>
+  <div class="prose">
+    <p>The OLOID Framework exists to answer those questions in a single, simple structure.</p>
+    <p><strong>It is our commitment to clarity, sovereignty, and responsibility — not hidden pipelines or fine print.</strong></p>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <p class="eyebrow dim">Six Principles</p>
+  <h2>Each principle derives from the geometry of the oloid itself</h2>
+  <p class="lede" style="margin-top:18px">— a shape defined by continuous motion, perfect balance, and unbroken contact.</p>
+  <div class="princ">
+    <div class="pr"><span>01</span><h3>Continuous Motion</h3><p>Clear, Traceable Intelligence</p></div>
+    <div class="pr"><span>02</span><h3>Balance by Design</h3><p>Humans Stay in Control</p></div>
+    <div class="pr"><span>03</span><h3>Unbroken Contact</h3><p>Your Data Never Leaves Your Environment</p></div>
+    <div class="pr"><span>04</span><h3>Transparency at Every Layer</h3><p>No Small Print</p></div>
+    <div class="pr"><span>05</span><h3>Decentralised Architecture</h3><p>No MultiTenancy, No Drift, No Exposure</p></div>
+    <div class="pr"><span>06</span><h3>Ethics in Motion</h3><p>HumanTeconomics Operationalised</p></div>
+  </div>
+</div></section>
+
+<section class="band oloidband"><div class="wrap">
+  <p class="eyebrow">Six Principles — in detail</p>
+  <h2>Each principle, and the questions it answers.</h2>
+  <div class="ptabs-wrap">
+    <div class="ptabs" role="tablist"><button class="ptab on" data-i="0" role="tab" aria-selected="true"><span class="pn">01</span><span><b>Continuous Motion</b><small>Clear, Traceable Intelligence</small></span><span class="ar">→</span></button><button class="ptab" data-i="1" role="tab" aria-selected="false"><span class="pn">02</span><span><b>Balance by Design</b><small>Humans Stay in Control</small></span><span class="ar">→</span></button><button class="ptab" data-i="2" role="tab" aria-selected="false"><span class="pn">03</span><span><b>Unbroken Contact</b><small>Your Data Never Leaves Your Environment</small></span><span class="ar">→</span></button><button class="ptab" data-i="3" role="tab" aria-selected="false"><span class="pn">04</span><span><b>Transparency at Every Layer</b><small>No Small Print</small></span><span class="ar">→</span></button><button class="ptab" data-i="4" role="tab" aria-selected="false"><span class="pn">05</span><span><b>Decentralised Architecture</b><small>No MultiTenancy, No Drift, No Exposure</small></span><span class="ar">→</span></button><button class="ptab" data-i="5" role="tab" aria-selected="false"><span class="pn">06</span><span><b>Ethics in Motion</b><small>HumanTeconomics Operationalised</small></span><span class="ar">→</span></button></div>
+    <div class="ppanel" id="ppanel" role="tabpanel" aria-live="polite"></div>
+  </div>
+</div></section>
+
+<section class="sec white"><div class="wrap">
+  <p class="eyebrow dim">Stability in Motion</p>
+  <h2>Even With All Protections, Some Risk Remains</h2>
+  <p class="lede" style="margin-top:18px;max-width:64ch">Even with full isolation, transparency, and decentralisation, no system is ever completely risk-free. What matters is how clearly we see those risks and how steadily we respond. Here's what can still go wrong — even inside a stable, balanced Oloid system:</p>
+  <div class="grid2">
+    <div class="cell"><span>01</span><h3>Occasional incorrect or edge-case answers</h3><p>No model is perfect, and rare misinterpretations can still occur.</p></div>
+    <div class="cell"><span>02</span><h3>Human misconfiguration</h3><p>Settings, permissions, or workflows can be applied incorrectly.</p></div>
+    <div class="cell"><span>03</span><h3>Regulatory or domain changes</h3><p>Rules evolve, and systems must adapt to stay aligned.</p></div>
+    <div class="cell"><span>04</span><h3>External factors</h3><p>Hardware failures, third-party libraries, or new security threats can emerge.</p></div>
+  </div>
+  <p class="lede" style="margin-top:32px">These are not hidden risks; they are known, manageable realities of any advanced system.</p>
+</div></section>
+
+<section class="sec intent"><div class="wrap intentgrid">
+  <div>
+    <p class="eyebrow">Evolving to Maintain Equilibrium</p>
+    <h2>Always in motion, always in balance.</h2>
+    <p style="margin-top:18px;color:rgba(255,255,255,.85)">Like the oloid — always in motion, always in balance — we evolve continuously to keep the system stable, clear, and aligned with human intention. We do this through:</p>
+  </div>
+  <div>
+    <div class="shifts" style="grid-template-columns:1fr">
+      <div class="shift" style="background:rgba(255,255,255,.10)"><span style="color:#FFD08A">01</span><p style="color:#fff">Continuous improvement of safeguards</p></div>
+      <div class="shift" style="background:rgba(255,255,255,.10)"><span style="color:#FFD08A">02</span><p style="color:#fff">Regular reviews of accuracy, security, and compliance</p></div>
+      <div class="shift" style="background:rgba(255,255,255,.10)"><span style="color:#FFD08A">03</span><p style="color:#fff">Transparent updates with no silent changes</p></div>
+      <div class="shift" style="background:rgba(255,255,255,.10)"><span style="color:#FFD08A">04</span><p style="color:#fff">Close collaboration with users to adapt to new needs</p></div>
+    </div>
+    <p class="intenttxt" style="margin-top:28px;font-size:20px"><span class="rule">Stability isn't static — it's maintained.<br>Equilibrium isn't fixed — it's practiced.</span><br>And we commit to that practice every day.</p>
+  </div>
+</div></section>
+</div>
+<div class="page" data-page="impacts"><header class="phero"><div class="wrap"><p class="eyebrow">Our impacts</p><h1>K.AI is now multimodal.</h1>
+<p class="lede">Evolving toward sentiment and visual understanding — adapting to how people naturally think, communicate, and decide.</p></div></header>
+<section class="sec" id="impacts-impacts">
+  <div class="wrap">
+    <p class="eyebrow dim">Capabilities</p>
+    <h2>Reads. Hears. Speaks. Soon, sees.</h2>
+    <div class="modal">
+      <div><b>Reads</b><span>Text &amp; documents</span></div>
+      <div><b>Hears</b><span>Audio input</span></div>
+      <div><b>Speaks</b><span>Voice output</span></div>
+      <div class="soon"><b>Sees</b><span>Visual — upcoming</span></div>
+    </div>
+    <div class="films">
+      <a class="film" href="https://www.youtube.com/watch?v=JM2d70FySM8" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/JM2d70FySM8/hqdefault.jpg" alt="Reshaping Decision Making — K.AI 2.0 Smart Assistant"><div class="cap"><b>Reshaping Decision Making — K.AI 2.0 Smart Assistant</b><span>Watch</span></div></a>
+      <a class="film" href="https://www.youtube.com/watch?v=95YpAnTu9y4" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/95YpAnTu9y4/hqdefault.jpg" alt="AccessOPTI – BIA — Pharma Strategic Planning Tool"><div class="cap"><b>AccessOPTI – BIA — Pharma Strategic Planning Tool</b><span>Watch</span></div></a>
+      <a class="film" href="https://www.youtube.com/watch?v=DdBhuRZlLIc" target="_blank" rel="noopener"><img src="https://img.youtube.com/vi/DdBhuRZlLIc/hqdefault.jpg" alt="KStrategy& Product Launch"><div class="cap"><b><span class="ks-logo ks-logo-inline" role="img" aria-label="KStrategy&"></span> Product Launch</b><span>Watch</span></div></a>
+    </div>
+    <p class="impnote">K.AI 2.0 is built for the human-first era — amplifying individual capability for better decisions, stronger resilience, and more equitable outcomes.</p>
+
+    <div class="suitehead" id="suite">
+      <div>
+        <p class="eyebrow hot">The suite</p>
+        <h2>One assistant. <span class="grad">Eleven connected apps.</span></h2>
+        <p class="lede" style="margin-top:14px">Every app runs on the same product context and hands its results to the next. Select an app to see what it draws on and what it passes forward.</p>
+      </div>
+      <a class="btn hot" href="mailto:contact@kstrategyand.com?subject=KStrategy%26%20suite%20demo">Request a demo →</a>
+    </div>
+    <div class="kai-row">
+      <span class="orb"></span>
+      <div><h3>K.AI — assistant &amp; knowledge base</h3><p>Evidence — RWE, trials, epidemiology, HTA policy — lives inside K.AI and is drawn on automatically by every app.</p></div>
+    </div>
+    <div class="legend"><span><i class="in"></i> Consumes</span><span><i></i> Produces</span></div>
+    <div class="board" id="board">
+      <svg id="wires" aria-hidden="true"></svg>
+      <div class="lanes">
+        <div class="lane"><div class="lane-head"><span class="bar" style="background:var(--accent)"></span><h3>Market Access &amp; HEOR</h3><span class="note">AccessOPTI</span></div><div class="tiles" data-lane="ma"></div></div>
+        <div class="lane"><div class="lane-head"><span class="bar" style="background:var(--orange)"></span><h3>Commercial</h3><span class="note">Connected</span></div><div class="tiles" data-lane="comm"></div></div>
+        <div class="lane"><div class="lane-head"><span class="bar" style="background:var(--ink)"></span><h3>Medical Affairs</h3><span class="note">Firewalled</span></div><div class="tiles" data-lane="med"></div></div>
+      </div>
+      <aside class="side"><div class="detail" id="detail" aria-live="polite"></div></aside>
+    </div>
+    <span class="kb-note">◆ Runs entirely in your infrastructure — no data sharing, no external calls.</span>
+  </div>
+</section><section class="sec white"><div class="wrap">
+  <p class="eyebrow dim">Three lanes, one record</p><h2>Connected where it should be. Firewalled where it must be.</h2>
+  <div class="grid3">
+    <div class="cell"><span>AccessOPTI</span><h3>Market Access &amp; HEOR</h3><p>Landscape, CEA, BIA, Pricing &amp; Tender and Access Loop share one product context. A change to the eligible population in BIA reaches pricing, forecasting and the payer story without re-keying.</p></div>
+    <div class="cell"><span>Connected</span><h3>Commercial</h3><p>Forecasting, Contracting and Brand &amp; Field consume covered volume, net price and positioning from the access apps and hand realised discounts and uptake back.</p></div>
+    <div class="cell"><span>Firewalled</span><h3>Medical Affairs</h3><p>Evidence Gen and KOL / MSL exchange clinical questions and approved narratives through K.AI, with the compliance boundary kept intact.</p></div>
+  </div>
+  <div class="grid3">
+    <div class="cell"><span>Projects</span><h3>One workspace per product</h3><p>Every app reads from and writes to the same record.</p></div>
+    <div class="cell"><span>K.AI chat</span><h3>Guided modes</h3><p>Learn, Source, Build, Analyse, Strategise — set the depth K.AI works at.</p></div>
+    <div class="cell"><span>Reports</span><h3>Traceable deliverables</h3><p>Budget impact models, dossiers and summaries, versioned and traceable to their inputs.</p></div>
+  </div>
+</div></section></div>
+<div class="page" data-page="discovery"><header class="phero dark"><div class="wrap">
+  <p class="eyebrow">K.AI · Discovery · New</p><h1>K.AI moves upstream.</h1>
+  <p class="lede">From access to discovery. The same intelligence, applied earlier — in your infrastructure, on your data, with humans in control.</p>
+  <div class="bandbtns"><a class="btn hot" href="#contact">Talk to us →</a><a class="btn" href="#how">How it works →</a></div>
+</div></header>
+<section class="sec white"><div class="wrap bandgrid">
+  <div><p class="eyebrow">First principles</p><h2 class="bandbig">Molecules are geometry.<br><span style="color:#7C8A8A">So is everything else.</span></h2></div>
+  <div class="prose">
+    <p>Discovery has always been a search problem dressed up as a chemistry problem. Candidates are screened, ranked and carried forward on the evidence available in the laboratory — while the questions that decide a medicine's fate, who will pay for it, against what comparator, at what price, are asked years later.</p>
+    <p><strong>We return it to first principles.</strong> The same geometry the Oloid Framework applies to strategy applies to a molecule: shape, motion and contact. K.AI reasons over structure, mechanism and evidence as one continuous surface, so a candidate is judged on the whole journey it has to make, not just the first step.</p>
+  </div>
+</div></section>
+<section class="cont" style="background:var(--paper)" id="continuum-discovery">
+  <div class="wrap">
+    <p class="eyebrow dim">One continuous line</p>
+    <h2>From discovery to access.</h2>
+    <p class="lede" style="margin-top:18px">Most of the industry treats discovery and access as two conversations, held years apart. A molecule that cannot be reimbursed was never viable — only unfinished.</p>
+    <div class="track" id="track-discovery">
+      <div class="line"></div><div class="fill" id="fill-discovery"></div><div class="oloid" id="knob-discovery"></div>
+      <div class="stages">
+        <div class="stage new"><span class="n">01</span><h3>Discovery</h3><p>Target identification · Candidate prioritisation · Mechanism reasoning</p></div>
+        <div class="stage new"><span class="n">02</span><h3>Development</h3><p>Trial design intelligence · Evidence gap mapping · Comparator strategy</p></div>
+        <div class="stage"><span class="n">03</span><h3>Access</h3><p>AccessOPTI — Landscape · CEA · BIA · Pricing &amp; Tender · Access Loop</p></div>
+      </div>
+    </div>
+    <div class="contfoot">
+      <div class="claim">One core. One memory. One intelligence.</div>
+      <a class="btn fill" href="#impacts/suite">See the suite →</a>
+    </div>
+  </div>
+</section>
+<section class="sec white" id="how"><div class="wrap">
+  <p class="eyebrow dim">What K.AI Discovery does</p><h2>Reasoning, not retrieval.</h2>
+  <p class="lede" style="margin-top:18px">Three capabilities, each traceable back to the evidence it used.</p>
+  <div class="grid3">
+    <div class="cell"><span>01</span><h3>Target identification</h3><p>Surface targets by mechanism and unmet need, weighed against the disease landscape and the evidence payers will eventually ask for.</p></div>
+    <div class="cell"><span>02</span><h3>Candidate prioritisation</h3><p>Rank candidates on likelihood of clinical, regulatory and reimbursement success together — not on any one of them alone.</p></div>
+    <div class="cell"><span>03</span><h3>Mechanism reasoning</h3><p>Explain why a candidate should work, where it may fail, and which comparators and endpoints will matter downstream.</p></div>
+  </div>
+</div></section>
+<section class="band"><div class="wrap bandgrid">
+  <div><p class="eyebrow">Built on the Oloid Framework</p><h2 class="bandbig">Your discovery data<br><span>never leaves you.</span></h2></div>
+  <div class="bandside"><p>Oloid runs entirely in your infrastructure — no data sharing, no external calls, no multi-tenancy. Discovery data is the most valuable asset a company owns. It should never be the price of using a tool.</p>
+  <div class="bandbtns"><a class="btn" href="#oloid-framework">Explore the Oloid Framework →</a></div></div>
+</div></section>
+<section class="sec founder">
+  <div class="wrap">
+    <p class="eyebrow dim">Why us</p>
+    <h2>Built by a scientist who has seen where molecules go to fail.</h2>
+    <p class="lede" style="margin-top:18px">Most medicines that fail do not fail in the laboratory. They fail years later, when the evidence a payer needs was never designed in.</p>
+    <div class="fgrid">
+      <div class="fcard"><div class="role">Science</div><p>Founded by Dr Keshalini Sabaratnam — DPhil, University of Oxford; postdoctoral research at Harvard Medical School in structural biology and antiviral drug discovery. Molecules understood as geometry first.</p></div>
+      <div class="fcard"><div class="role">Market access</div><p>Over a decade across academia, strategic market access and HTA consulting in pharma and healthcare, and drug-development data analytics — where a molecule's fate is decided long after the laboratory has finished with it.</p></div>
+    </div>
+  </div>
+</section>
+<section class="cta"><div class="wrap"><h2>Discovery is not a search. It is a decision.</h2><p class="lede">Let's talk about where yours is being made.</p><a class="btn fill" href="#contact">Talk to us about K.AI Discovery →</a></div></section></div>
+<div class="page" data-page="quantum">
+<header class="phero dark"><div class="wrap">
+  <p class="eyebrow">Quantum</p>
+  <h1>Some problems are not hard.<br>They are wide.</h1>
+  <p class="lede" style="font-size:clamp(20px,2vw,26px);color:#fff">We are building for the machines that can hold them.</p>
+  <p class="lede">Classical machines search a space one region at a time. The questions that decide a medicine — which molecule, which trial, which comparator — are not shaped like that.</p>
+  <div class="bandbtns"><a class="btn hot" href="#contact">Talk to us →</a><a class="btn" href="#quantum/q-position">The honest position →</a></div>
+</div></header>
+
+<section class="sec white"><div class="wrap">
+  <p class="eyebrow dim">Where we are</p>
+  <h2>A wide space, and one path at a time.</h2>
+  <p class="lede" style="margin-top:18px;max-width:64ch">Quantum computing is not ready, and we will not be the ones to tell you otherwise. What is ready is the decision to stop building as though it will never arrive — because the cost of that assumption is not paid on the day the hardware lands. It is paid in every model written between now and then.</p>
+  <div class="grid3">
+    <div class="cell"><span>01</span><h3 style="font-size:44px;letter-spacing:-.03em">10<sup style="font-size:22px">60</sup></h3><p>The commonly cited size of drug-like chemical space. Classical search visits it one region at a time.</p></div>
+    <div class="cell"><span>02</span><h3 style="font-size:44px;letter-spacing:-.03em">0</h3><p>Qubits required to start. The work that matters now is how the problem is stated, not what runs it.</p></div>
+    <div class="cell"><span>03</span><h3 style="font-size:44px;letter-spacing:-.03em">1</h3><p>Architecture. The backend changes; your models, your audit trail, and the reasoning behind them do not.</p></div>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <p class="eyebrow dim">What changes</p>
+  <h2>We are not waiting for the hardware.<br><span class="grad">We are removing the reason to wait.</span></h2>
+  <p class="lede" style="margin-top:18px;max-width:64ch">Quantum readiness is mostly not a quantum problem. It is a question of whether a problem was written down in a way that outlives the machine it first ran on.</p>
+  <div class="grid3">
+    <div class="cell"><span>01 — Frame</span><h3>A problem stated once</h3><p>Express a chemistry or optimisation question in a form that does not assume the machine underneath it. Most of the work of quantum readiness is not quantum.</p></div>
+    <div class="cell"><span>02 — Solve</span><h3>Classical now, quantum when it lands</h3><p>The same statement runs on the hardware you already have and targets quantum backends as they mature. Nothing is held back waiting for a machine.</p></div>
+    <div class="cell"><span>03 — Switch</span><h3>No rewrite, no migration</h3><p>When the hardware is ready, what changes is the backend. Your models, your traceability, and the conclusions already on record stay exactly as they are.</p></div>
+  </div>
+</div></section>
+
+<section class="sec white"><div class="wrap">
+  <p class="eyebrow dim">Where it lands first</p>
+  <h2>Three problems shaped like the machine.</h2>
+  <p class="lede" style="margin-top:18px;max-width:64ch">Quantum will not make everything faster, and a page that says otherwise is selling something. These are the three classes where the advantage is expected to be demonstrable rather than argued — and all three are already in our work.</p>
+  <div class="grid3">
+    <div class="cell"><span>K.AI Discovery</span><h3>Molecular simulation</h3><p>Electronic structure at a fidelity classical approximation cannot reach. The first place quantum advantage is expected to be demonstrable rather than debated.</p></div>
+    <div class="cell"><span>Development</span><h3>Combinatorial optimisation</h3><p>Trial design, comparator selection, portfolio and supply decisions — problems where the space is wide rather than the arithmetic hard.</p></div>
+    <div class="cell"><span>AccessOPTI — BIA · CEA</span><h3>Sampling under uncertainty</h3><p>Probabilistic models whose distributions are expensive to draw from. The question our budget-impact and cost-effectiveness work already asks, at a scale it cannot yet reach.</p></div>
+  </div>
+</div></section>
+
+<section class="band"><div class="wrap bandgrid">
+  <div><p class="eyebrow">The Oloid framework</p><h2 class="bandbig">Faster hardware,<br><span>the same terms.</span></h2></div>
+  <div class="bandside">
+    <p>The day a quantum backend is worth using, most of them will be someone else's machine, reached across someone else's network. That is an architecture problem, and we would rather solve it now than discover it later.</p>
+    <p class="strong">What does not loosen because the hardware got faster: no multi-tenancy of your models, no training on your science, and every conclusion traceable to what produced it.</p>
+    <div class="bandbtns"><a class="btn" href="#oloid-framework">Explore the Oloid framework →</a></div>
+  </div>
+</div></section>
+
+<section class="sec" id="q-position"><div class="wrap">
+  <p class="eyebrow dim">The honest position</p>
+  <h2>What is true today, in three lines.</h2>
+  <div class="grid3">
+    <div class="cell"><span>What runs today</span><h3 style="color:var(--accent)">Classical hardware, and only classical hardware.</h3><p>Every model we ship is useful on its own terms and depends on no machine that does not yet exist.</p></div>
+    <div class="cell"><span>What does not</span><h3 style="color:#D08400">Quantum advantage.</h3><p>No credible general advantage exists yet for the workloads we care about, and we do not price, plan, or promise as though it does.</p></div>
+    <div class="cell"><span>What we will not claim</span><h3 style="color:#E0576F">A date.</h3><p>Credible estimates for useful quantum chemistry range from a few years to more than a decade. We are building so that the answer does not have to be yours to carry.</p></div>
+  </div>
+  <p class="lede" style="margin-top:32px">Transparency at Every Layer is one of the six principles of the Oloid framework, and it does not get suspended for the subject everyone else exaggerates.</p>
+</div></section>
+
+<section class="cta"><div class="wrap">
+  <h2>Quantum is not a product.<br><span class="grad">It is a preparation.</span></h2>
+  <p class="lede">If your roadmap already assumes it, we should talk about what it actually requires.</p>
+  <a class="btn fill" href="#contact">Get in touch →</a>
+</div></section>
+</div>
+<div class="page" data-page="contact"><header class="phero"><div class="wrap"><p class="eyebrow">Contact</p><h1>Ready to Unlearn and Relearn?</h1><p class="lede">Let's talk about how the Oloid Framework can transform your organisation.</p></div></header>
+<section class="sec"><div class="wrap two">
+  <div class="form">
+    <label for="n">Name</label><input id="n" autocomplete="name">
+    <label for="e">Work email</label><input id="e" type="email" autocomplete="email">
+    <label for="o">Organisation</label><input id="o" autocomplete="organization">
+    <label for="i">I'm interested in</label>
+    <select id="i"><option>K.AI Discovery</option><option>The suite / AccessOPTI</option><option>The Oloid Framework</option><option>Something else</option></select>
+    <label for="m">Message</label><textarea id="m"></textarea>
+    <a class="btn fill" href="mailto:contact@kstrategyand.com" id="send">Send message →</a>
+    <p style="font-size:13px;color:var(--ink-soft);margin-top:12px">Opens your email client with the message pre-filled.</p>
+  </div>
+  <div>
+    <p class="eyebrow dim"><span class="ks-logo ks-logo-contact" role="img" aria-label="KStrategy&"></span></p>
+    <p style="font-size:19px"><a href="mailto:contact@kstrategyand.com" style="color:var(--accent);text-decoration:none">contact@kstrategyand.com</a></p>
+    <p style="color:var(--ink-soft)">71-75, Shelton Street, Covent Garden,<br>London, WC2H 9JQ</p>
+    <p><a href="https://www.linkedin.com/company/kstrategyand" style="color:var(--accent)">LinkedIn</a></p>
+  </div>
+</div></section></div>
+<div class="page" data-page="privacy"><header class="phero"><div class="wrap"><p class="eyebrow">Legal</p><h1>Privacy</h1><p class="lede">Placeholder — replace with your privacy text before publishing.</p></div></header>
+<section class="sec white"><div class="wrap prose"><p>Content to follow.</p></div></section></div>
+<div class="page" data-page="terms"><header class="phero"><div class="wrap"><p class="eyebrow">Legal</p><h1>Terms</h1><p class="lede">Placeholder — replace with your terms text before publishing.</p></div></header>
+<section class="sec white"><div class="wrap prose"><p>Content to follow.</p></div></section></div>
+<footer id="contact">
+  <div class="wrap">
+    <h2>Ready to Unlearn and Relearn?</h2>
+    <p style="max-width:46ch">Let's talk about how the Oloid Framework can transform your organisation.</p>
+    <a class="btn hot" href="#contact">Get in touch →</a>
+    <div class="fbot">
+      <span>contact@kstrategyand.com · 71-75, Shelton Street, Covent Garden, London, WC2H 9JQ</span>
+      <span>© 2026 <span class="ks-logo ks-logo-footer" role="img" aria-label="KStrategy&"></span> All rights reserved. <a href="#privacy">Privacy</a><a href="#terms">Terms</a><a href="https://www.linkedin.com/company/kstrategyand">LinkedIn</a></span>
+    </div>
+  </div>
+</footer>
+<script>
+
+
+/* Suite model — ported from kstrategy-shell.html */
+const ICON={
+  bia:'<path d="M4 20V6M4 20h16M8 20v-6M12 20v-9M16 20v-4M20 20V8"/>',
+  cea:'<path d="M12 3v3M12 21v-3M5 7l2 2M17 15l2 2M4 12H2M22 12h-2M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/>',
+  la:'<path d="M9 20l-6-2V4l6 2 6-2 6 2v14l-6-2-6 2ZM9 6v14M15 4v14"/>',
+  loop:'<path d="M4 12a8 8 0 0 1 14-5l2 2M20 12a8 8 0 0 1-14 5l-2-2M18 4v5h-5M6 20v-5h5"/>',
+  pricing:'<path d="M20 12l-8 8-8-8V4h8l8 8ZM7.5 7.5h.01"/>',
+  forecast:'<path d="M3 17l5-6 4 4 8-9M16 6h5v5"/>',
+  contract:'<path d="M8 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3M9 7h6M9 11h6M9 15h3M17 3l4 4-7 7h-4v-4l7-7Z"/>',
+  brand:'<path d="M12 21s-7-4.5-9-9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c-2 4.5-9 9-9 9Z"/>',
+  evgen:'<path d="M9 3v6l-4 8a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-4-8V3M8 3h8"/>',
+  kol:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/>'
+};
+const LANES={
+  ma:{apps:['la','cea','bia','pricing','loop'],color:'#005656',name:'Market Access & HEOR'},
+  comm:{apps:['forecast','contract','brand'],color:'#F59504',name:'Commercial'},
+  med:{apps:['evgen','kol'],color:'#102830',name:'Medical Affairs'}
+};
+const APPS={
+  la:{lane:'ma',name:'Landscape',desc:'Market landscape',kb:['Competitor pipeline','Reimbursed comparators'],consumes:[],produces:[['Pricing & Tender','Comparator prices'],['Forecasting','Share assumptions'],['Brand & Field','Positioning']],links:{pricing:'out',forecast:'out',brand:'out'}},
+  cea:{lane:'ma',name:'CEA',desc:'Cost-effectiveness',kb:['Effectiveness & utilities','Trial efficacy & safety'],consumes:[['Access Loop','Payer evidence gaps'],['Evidence Gen','Updated RWE inputs']],produces:[['BIA','Cost inputs & ICER'],['Access Loop','Value case']],links:{loop:'out',bia:'out',evgen:'in'}},
+  bia:{lane:'ma',name:'BIA',desc:'Budget impact',kb:['Eligible population'],consumes:[['CEA','Cost inputs & ICER'],['Pricing & Tender','Net price scenarios']],produces:[['Pricing & Tender','Affordability envelope'],['Forecasting','Covered volume'],['Access Loop','Budget story']],links:{cea:'in',pricing:'out',forecast:'out',loop:'out'}},
+  pricing:{lane:'ma',name:'Pricing & Tender',desc:'Pricing strategy',kb:['Reference & tender price data'],consumes:[['BIA','Affordability envelope'],['Landscape','Comparator prices'],['Access Loop','Willingness to pay']],produces:[['BIA','Net price scenarios'],['Forecasting','Net price / GtN'],['Contracting','Tender floors']],links:{bia:'out',la:'in',loop:'in',forecast:'out',contract:'out'}},
+  loop:{lane:'ma',name:'Access Loop',desc:'Payer & KOL research',kb:[],consumes:[['CEA','Value case to test'],['BIA','Budget story']],produces:[['CEA','Evidence gaps'],['Pricing & Tender','Willingness to pay'],['KOL / MSL','Insight themes']],links:{cea:'out',bia:'in',pricing:'out',kol:'out'}},
+  forecast:{lane:'comm',name:'Forecasting',desc:'Revenue & uptake',kb:['Addressable patients'],consumes:[['BIA','Covered volume'],['Pricing & Tender','Net price / GtN'],['Landscape','Share assumptions']],produces:[['Contracting','Volume commitments'],['Brand & Field','Uptake targets']],links:{bia:'in',pricing:'in',la:'in',contract:'out',brand:'out'}},
+  contract:{lane:'comm',name:'Contracting',desc:'Deals & tenders',kb:[],consumes:[['Pricing & Tender','Tender floors'],['Forecasting','Volume commitments']],produces:[['Pricing & Tender','Realised discount']],links:{pricing:'out',forecast:'in'}},
+  brand:{lane:'comm',name:'Brand & Field',desc:'Field strategy',kb:[],consumes:[['Landscape','Positioning'],['Forecasting','Uptake targets'],['KOL / MSL','Approved narratives']],produces:[['Forecasting','Field-adjusted uptake']],links:{la:'in',forecast:'out',kol:'in'}},
+  evgen:{lane:'med',name:'Evidence Gen',desc:'RWE & studies',kb:[],consumes:[['CEA','Evidence gaps'],['Access Loop','Payer asks']],produces:[['CEA','Updated RWE inputs']],links:{cea:'out'}},
+  kol:{lane:'med',name:'KOL / MSL',desc:'Scientific exchange',kb:[],consumes:[['Access Loop','Insight themes']],produces:[['Brand & Field','Approved narratives'],['Evidence Gen','Clinical questions']],links:{loop:'in',brand:'out',evgen:'out'}}
+};
+const board=document.getElementById('board'),svg=document.getElementById('wires');
+if(board){
+Object.entries(LANES).forEach(([lid,l])=>{
+  const host=document.querySelector(`.tiles[data-lane="${lid}"]`);
+  l.apps.forEach(id=>{const a=APPS[id];const el=document.createElement('button');el.className='tile';el.dataset.node=id;el.type='button';
+    el.innerHTML=`<span class="badge"></span><span class="ti" style="background:${l.color}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICON[id]}</svg></span><h4>${a.name}</h4><div class="d">${a.desc}</div>`;
+    el.addEventListener('click',()=>select(id));host.appendChild(el);});
+});
+let selected=null;window.__sel=()=>selected;window.__draw=drawWires;
+function center(n){const el=document.querySelector(`[data-node="${n}"]`);if(!el)return null;const b=el.getBoundingClientRect(),o=board.getBoundingClientRect();return{x:b.left-o.left+b.width/2,y:b.top-o.top+b.height/2};}
+function curve(a,b){const mx=(a.x+b.x)/2;return `M${a.x},${a.y} C${mx},${a.y} ${mx},${b.y} ${b.x},${b.y}`;}
+function drawWires(id){svg.innerHTML='';const from=center(id);if(!from)return;Object.entries(APPS[id].links).forEach(([to,dir])=>{const p=center(to);if(!p)return;const path=document.createElementNS('http://www.w3.org/2000/svg','path');path.setAttribute('d',curve(from,p));path.setAttribute('class',dir);svg.appendChild(path);requestAnimationFrame(()=>path.classList.add('show'));});}
+function select(id){selected=id;const a=APPS[id];
+  document.querySelectorAll('.tile').forEach(t=>{t.classList.remove('active','link','dim');const b=t.querySelector('.badge');b.className='badge';b.textContent='';});
+  document.querySelector(`.tile[data-node="${id}"]`).classList.add('active');
+  document.querySelectorAll('.tile').forEach(t=>{const n=t.dataset.node;if(n===id)return;if(a.links[n]){t.classList.add('link');const b=t.querySelector('.badge');const d=a.links[n];b.classList.add(d==='in'?'consumes':'produces');b.textContent=d==='in'?'in':'out';}else t.classList.add('dim');});
+  const li=(x,cls)=>`<li><b class="${cls||''}">${x[0]}</b> ${x[1]}</li>`;
+  const kb=a.kb.length?`<div class="io"><h4>Draws from the K.AI knowledge base</h4><ul>${a.kb.map(x=>li(['via K.AI',x],'kb')).join('')}</ul></div>`:'';
+  const cons=a.consumes.length?`<div class="io"><h4>Consumes from other apps</h4><ul>${a.consumes.map(x=>li(x)).join('')}</ul></div>`:'';
+  const prod=`<div class="io"><h4>Produces</h4><ul>${a.produces.map(x=>li(x)).join('')}</ul></div>`;
+  document.getElementById('detail').innerHTML=`<div class="lane-name">${LANES[a.lane].name}</div><h3>${a.name}</h3><p class="blurb">${a.desc}</p>${kb}${cons}${prod}`;
+  drawWires(id);
+}
+if(board){select('bia');}
+window.addEventListener('resize',()=>{if(selected)drawWires(selected);});
+}
+
+const menu=document.getElementById('menu'),nl=document.getElementById('navlinks');
+menu.addEventListener('click',()=>{const o=nl.classList.toggle('open');menu.setAttribute('aria-expanded',o);});
+nl.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nl.classList.remove('open')));
+document.querySelectorAll('.track').forEach(track=>{const fill=track.querySelector('.fill'),knob=track.querySelector('.oloid');const go=()=>{fill.style.width='100%';knob.style.left='calc(100% - 18px)';};if('IntersectionObserver' in window){new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)go();}),{threshold:.3}).observe(track);}else go();});
+
+const send=document.getElementById('send');
+if(send){send.addEventListener('click',()=>{const v=id=>encodeURIComponent(document.getElementById(id).value);
+  send.href=`mailto:contact@kstrategyand.com?subject=${v('i')}%20%E2%80%94%20${v('o')}&body=${v('m')}%0A%0A${v('n')}%0A${v('e')}`;});}
+
+
+/* single-file router */
+const PAGES=[...document.querySelectorAll('.page')];
+function route(){
+  let h=(location.hash||'#index').slice(1); let [pg,anchor]=h.split('/');
+  if(!PAGES.some(p=>p.dataset.page===pg)){anchor=pg;pg=PAGES.find(p=>p.classList.contains('active'))?.dataset.page||'index';}
+  PAGES.forEach(p=>p.classList.toggle('active',p.dataset.page===pg));
+  document.querySelectorAll('.navlinks a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+pg));
+  document.getElementById('navlinks').classList.remove('open');
+  if(pg==='impacts'||pg==='index'){if(window.__sel&&window.__sel())requestAnimationFrame(()=>window.__draw(window.__sel()));}
+  if(anchor){const el=document.getElementById(anchor)||document.querySelector(`.page.active #${anchor}`);if(el){el.scrollIntoView({block:'start'});return;}}
+  window.scrollTo(0,0);
+}
+window.addEventListener('hashchange',route);route();
+
+
+/* per-app colours (from the app grid) */
+const COLORS={la:'#1F9E8F',cea:'#6A5AE0',bia:'#D9A21B',pricing:'#2FA36B',loop:'#F08A24',forecast:'#3B7DDD',contract:'#5F7280',brand:'#E85D3A',evgen:'#8A4FD6',kol:'#E24A8A'};
+document.querySelectorAll('.tile').forEach(t=>{const c=COLORS[t.dataset.node];if(c){const ti=t.querySelector('.ti');ti.style.background=`linear-gradient(135deg,${c},${c}CC)`;}});
+/* scroll reveal */
+const rvEls=[...document.querySelectorAll('.wrap > *:not(nav *)')].filter(e=>!e.closest('nav'));
+rvEls.forEach(e=>e.classList.add('rv'));
+if('IntersectionObserver' in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});rvEls.forEach(e=>io.observe(e));}else rvEls.forEach(e=>e.classList.add('in'));
+window.addEventListener('hashchange',()=>{setTimeout(()=>{document.querySelectorAll('.page.active .rv').forEach(e=>{const r=e.getBoundingClientRect();if(r.top<window.innerHeight)e.classList.add('in');});},50);});
+
+/* Oloid principle tabs */
+const PRINC=[{"t": "Continuous Motion", "s": "Clear, Traceable Intelligence", "q": "Our intelligence works the same way: nothing is hidden, and every step can be traced.", "how": ["Every process follows the same transparent arc", "You always know what the system is doing and why.", "Every output can be explained.", "No silent learning loops.", "No background training on your data."], "ans": [["Is the model doing anything I can't see?", "No."], ["Can I check how an output was generated?", "Yes. Always."]]}, {"t": "Balance by Design", "s": "Humans Stay in Control", "q": "The oloid balances two surfaces at once. We balance human judgment and machine support in the same way.", "how": ["AI supports decisions — it does not override them.", "The system never nudges behaviour or rewrites your processes.", "You choose the level of automation.", "Human reasoning remains the anchor point."], "ans": [["Will the AI overrule people?", "No."], ["Does it influence behaviour?", "No. It informs, not persuades."]]}, {"t": "Unbroken Contact", "s": "Your Data Never Leaves Your Environment", "q": "The oloid stays in contact with the surface at all times. Your intelligence stays in your environment at all times.", "how": ["Your own database", "Your own model instance", "Your own vector store", "Your own encryption keys", "Your own infrastructure boundary", "Even when we host it, we cannot access your documents, logs, outputs, or telemetry (unless you explicitly enable it), all protected by blockchain technology."], "ans": [["Where does my data actually go?", "Nowhere. It stays with you."], ["Can you see anything?", "No. Not even if we're hosting the system."], ["Is this SaaS?", "No. This is private infrastructure."]]}, {"t": "Transparency at Every Layer", "s": "No Small Print", "q": "If something isn't clear, it shouldn't exist. We remove the anxiety of hidden behaviour.", "how": ["You see what the system processes.", "You see what it stores.", "You choose what is logged.", "You control data retention and deletion.", "Nothing is shared with third parties.", "Nothing is used for training unless you explicitly enable it."], "ans": [["Is anything collected without my knowledge?", "No."], ["Can I turn off telemetry?", "Yes, completely."], ["Are there hidden terms?", "None."]]}, {"t": "Decentralised Architecture", "s": "No MultiTenancy, No Drift, No Exposure", "q": "Centralisation creates risk. Decentralisation creates safety.", "how": ["Every client has a fully independent environment.", "No shared backend.", "No cross-client exposure.", "No aggregated central database.", "No silent model drift triggered by other customers' data."], "ans": [["Could another client's data ever mix with ours?", "Impossible."], ["Could a bug expose us to another tenant?", "There is no multi tenant system."]]}, {"t": "Ethics in Motion", "s": "HumanTeconomics Operationalised", "q": "This framework isn't only technical — it's ethical.", "how": ["Technology strengthens people, not workloads.", "Intelligence protects dignity before efficiency.", "Systems are designed for long-term societal resilience, not short-term gain.", "Built for industries that cannot afford mistakes."], "ans": [["What values guide this architecture?", "Human safety, clarity, and sovereignty."], ["Is this future proof?", "Yes. Built for generational resilience."]]}];
+const ppanel=document.getElementById('ppanel');
+function showPrinc(i){const x=PRINC[i];
+  document.querySelectorAll('.ptab').forEach(t=>{const on=+t.dataset.i===i;t.classList.toggle('on',on);t.setAttribute('aria-selected',on);});
+  ppanel.style.animation='none';void ppanel.offsetWidth;ppanel.style.animation='';
+  ppanel.innerHTML=`<div class="phead"><div class="pbadge">0${i+1}</div><div><h3>${x.t}</h3><div class="psub">${x.s}</div></div></div>
+   <p class="pquote">"${x.q}"</p>
+   <p class="plabel">How it works</p><ol>${x.how.map((l,k)=>`<li><span>0${k+1}</span>${l}</li>`).join('')}</ol>
+   <p class="plabel">What this answers</p><div class="pans">${x.ans.map(a=>`<p>"${a[0]}" → <b>${a[1]}</b></p>`).join('')}</div>`;}
+if(ppanel){document.querySelectorAll('.ptab').forEach(t=>t.addEventListener('click',()=>showPrinc(+t.dataset.i)));showPrinc(0);}
+</script>
+
+</body>
+</html>
